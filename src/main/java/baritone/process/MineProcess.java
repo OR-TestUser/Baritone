@@ -104,7 +104,7 @@ public final class MineProcess extends BaritoneProcessHelper implements IMinePro
         updateLoucaSystem();
         int mineGoalUpdateInterval = Baritone.settings().mineGoalUpdateInterval.value;
         List<BlockPos> curr = new ArrayList<>(knownOreLocations);
-        if (mineGoalUpdateInterval != 0 && tickCount++ % mineGoalUpdateInterval == 0) { // big brain
+        if (mineGoalUpdateInterval != 0 && ((mineGoalUpdateInterval != 0) ? (tickCount++ % mineGoalUpdateInterval) : 0) == 0) { // big brain
             CalculationContext context = new CalculationContext(baritone, true);
             Baritone.getExecutor().execute(() -> rescan(curr, context));
         }
