@@ -179,7 +179,7 @@ public final class FarmProcess extends BaritoneProcessHelper implements IFarmPro
             }
         }
 
-        if (Baritone.settings().mineGoalUpdateInterval.value != 0 && tickCount++ % Baritone.settings().mineGoalUpdateInterval.value == 0) {
+        if (Baritone.settings().mineGoalUpdateInterval.value != 0 && ((Baritone.settings().mineGoalUpdateInterval.value != 0) ? (tickCount++ % Baritone.settings().mineGoalUpdateInterval.value) : 0) == 0) {
             Baritone.getExecutor().execute(() -> locations = WorldScanner.INSTANCE.scanChunkRadius(ctx, scan, 256, 10, 10));
         }
         if (locations == null) {
