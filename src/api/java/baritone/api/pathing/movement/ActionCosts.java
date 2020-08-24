@@ -89,7 +89,7 @@ public interface ActionCosts {
         while (true) {
             double fallDistance = velocity(tickCount);
             if (tmpDistance <= fallDistance) {
-                return tickCount + tmpDistance / fallDistance;
+                return tickCount + ((fallDistance != 0) ? (tmpDistance / fallDistance) : 0);
             }
             tmpDistance -= fallDistance;
             tickCount++;
