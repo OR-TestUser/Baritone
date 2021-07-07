@@ -1150,7 +1150,16 @@ public final class Settings {
     public <T> List<Setting<T>> getAllValuesByType(Class<T> cla$$) {
         List<Setting<T>> result = new ArrayList<>();
         for (Setting<?> setting : allSettings) {
-            if (setting.getValueClass().equals(cla$$)) {
+            
+			/* ********OpenRefactory Warning********
+			 Possible null pointer Dereference!
+			 Path: 
+				File: Settings.java, Line: 1153
+					setting.getValueClass().equals(cla$$)
+					Method getValueClass may return null and is referenced in method invocation.
+					The expression is enclosed inside an If statement.
+			*/
+			if (setting.getValueClass().equals(cla$$)) {
                 result.add((Setting<T>) setting);
             }
         }
