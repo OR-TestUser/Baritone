@@ -163,7 +163,25 @@ public final class RotationUtils {
     public static Optional<Rotation> reachable(EntityPlayerSP entity, BlockPos pos, double blockReachDistance, boolean wouldSneak) {
         IBaritone baritone = BaritoneAPI.getProvider().getBaritoneForPlayer(entity);
         if (baritone.getPlayerContext().isLookingAt(pos)) {
-            /*
+            
+			/* ********OpenRefactory Warning********
+			 Possible null pointer dereference!
+			 Path: 
+				File: MineProcess.java, Line: 373
+					RotationUtils.reachable(ctx.player(),pos,fakedBlockReachDistance)
+					 Information is passed through the method call via ctx.player() to the formal param entity of the method. This later results into a null pointer dereference.
+					The expression is enclosed inside an If statement.
+				File: RotationUtils.java, Line: 159
+					EntityPlayerSP entity
+					Variable entity is declared as a formal parameter.
+				File: RotationUtils.java, Line: 160
+					return reachable(entity,pos,blockReachDistance,false);
+					 Information is passed through the method call via entity to the formal param entity of the method. This later results into a null pointer dereference.
+				File: RotationUtils.java, Line: 176
+					Rotation hypothetical=new Rotation(entity.rotationYaw,entity.rotationPitch + 0.0001F);
+					entity is referenced in field access.
+			*/
+			/*
              * why add 0.0001?
              * to indicate that we actually have a desired pitch
              * the way we indicate that the pitch can be whatever and we only care about the yaw
