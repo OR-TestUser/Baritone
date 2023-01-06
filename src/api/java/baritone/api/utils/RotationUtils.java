@@ -190,7 +190,24 @@ public final class RotationUtils {
             return possibleRotation;
         }
 
-        IBlockState state = entity.world.getBlockState(pos);
+        /* ********OpenRefactory Warning********
+		 Possible null pointer dereference!
+		 Path: 
+			File: MineProcess.java, Line: 373
+				RotationUtils.reachable(ctx.player(),pos,fakedBlockReachDistance)
+				 Information is passed through the method call via ctx.player() to the formal param entity of the method. This later results into a null pointer dereference.
+				The expression is enclosed inside an If statement.
+			File: RotationUtils.java, Line: 159
+				EntityPlayerSP entity
+				Variable entity is declared as a formal parameter.
+			File: RotationUtils.java, Line: 160
+				return reachable(entity,pos,blockReachDistance,false);
+				 Information is passed through the method call via entity to the formal param entity of the method. This later results into a null pointer dereference.
+			File: RotationUtils.java, Line: 193
+				IBlockState state=entity.world.getBlockState(pos);
+				entity is referenced in field access.
+		*/
+		IBlockState state = entity.world.getBlockState(pos);
         AxisAlignedBB aabb = state.getBoundingBox(entity.world, pos);
         for (Vec3d sideOffset : BLOCK_SIDE_MULTIPLIERS) {
             double xDiff = aabb.minX * sideOffset.x + aabb.maxX * (1 - sideOffset.x);
